@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Track</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000d06;
+            color: #e8fceb; /* Light green for text */
+            /* Starry background effect with an emerald/green hue */
+            background-image: radial-gradient(#ffffff61 1px, transparent 1px),
+                            radial-gradient(#ffffff61 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            animation: move-stars 150s linear infinite;
+        }
+
+        @keyframes move-stars {
+            from { background-position: 0 0, 20px 20px; }
+            to { background-position: -400px -400px, -380px -380px; }
+        }
+
+        .card-container {
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 1s ease;
+        }
+
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border-radius: 12px;
+            border: 2px solid #1a541a;
+            box-shadow: 0 0 10px 2px #1a541a;
+        }
+
+        .card-front {
+            background: linear-gradient(145deg, rgba(26, 84, 26, 0.2) 0%, rgba(0, 6, 0, 0.8) 100%);
+            color: #fff;
+        }
+
+        .card-back {
+            background-color: #28a328;
+            color: #000d06; /* Dark green/black for text */
+            transform: rotateY(180deg);
+        }
+
+        .cta-button {
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .cta-button:hover {
+            background-color: #4be04b;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .popup-content {
+            background-color: #00290e;
+            border: 2px solid #1a541a;
+            box-shadow: 0 0 20px 5px #1a541a;
+            color: #66d966;
+        }
+        
+        /* New styles for the revealed question popup */
+        .revealed-question-content {
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+        
+        /* Styles for the audio container in the popup */
+        #revealedAudioContainer {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        /* Styles for the play audio button on the card back */
+        .play-audio-btn {
+            margin-top: 1rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 1px solid #fff;
+        }
+
+        .play-audio-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <nav class="w-full max-w-7xl flex items-center bg-[#00290e] bg-opacity-70 p-4 rounded-xl shadow-lg border border-[#1a541a] mb-8">
+        <a href="#" class="h-20 w-20 mr-4 flex-shrink-0">
+            <img src="https://github.com/SIAM-VIT/MPL-Jeopardy-Rd3/blob/main/github/Images/Logo.png?raw=true" alt="Logo" class="rounded-full w-full h-full">
+        </a>
+        <div class="flex items-center space-x-12 ml-auto">
+            <a href="./demo.html" class="text-white hover:text-green-400 transition-colors duration-300 text-lg">Home</a>
+            <a href="#" class="text-white hover:text-green-400 transition-colors duration-300 text-lg">Powerup</a>
+            <a href="#" class="text-white hover:text-green-400 transition-colors duration-300 text-lg">Reset</a>
+            <a href="./Scoreboard/Scoreboard.html">
+                <button class="bg-green-500 hover:bg-green-400 text-[#0d0a00] font-bold py-3 px-8 rounded-full shadow-md transition-colors duration-300 text-lg">
+                    Scoreboard
+                </button>
+            </a>
+        </div>
+    </nav>
+    
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-8 text-center">
+        SPORTS <span class="text-[#66d966] border-b-2 border-dashed border-[#1a541a]">TRACK</span>
+    </h1>
+
+    <main class="flex-1 flex flex-col items-center justify-center w-full max-w-6xl">
+        <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 w-full place-items-center">
+            
+            <div class="card-container rounded-xl w-72 h-52 text-center group Sports">
+                <div class="card-inner Sports-card-1">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 1</h2>
+                        <p class="text-2xl mt-2">100</p>
+                    </div>
+                    <div class="card-back flex flex-col items-center justify-center p-4">
+                        <p class="text-2xl text-white font-normal">WILD CARD! <br> BETTER GET BIDDING!</p>
+                        <!--button class="bg-[#ffffff61] text-black font-bold text-lg py-3 px-8 rounded-full transition-colors duration-300 play-audio-btn">
+                            Play Audio
+                        </button-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container rounded-xl w-72 h-52 text-center group Sports">
+                <div class="card-inner Sports-card-2">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 2</h2>
+                        <p class="text-2xl mt-2">200</p>
+                    </div>
+                    <div class="card-back flex flex-col items-center justify-center p-4">
+                        <p class="text-2xl text-white font-normal">Guess the song name</p>
+                        <button class="bg-[#ffffff61] text-black font-bold text-lg py-3 px-8 rounded-full transition-colors duration-300 play-audio-btn">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container rounded-xl w-72 h-52 text-center group Sports">
+                <div class="card-inner Sports-card-3">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 3</h2>
+                        <p class="text-2xl mt-2">300</p>
+                    </div>
+                    <div class="card-back flex flex-col items-center justify-center p-4">
+                        <p class="text-2xl text-white font-normal">Guess the song name</p>
+                        <button class="bg-[#ffffff61] text-black font-bold text-lg py-3 px-8 rounded-full transition-colors duration-300 play-audio-btn">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container rounded-xl w-72 h-52 text-center group Sports">
+                <div class="card-inner Sports-card-4">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 4</h2>
+                        <p class="text-2xl mt-2">400</p>
+                    </div>
+                    <div class="card-back flex flex-col items-center justify-center p-4">
+                        <p class="text-2xl text-white font-normal">Guess the song name</p>
+                        <button class="bg-[#ffffff61] text-black font-bold text-lg py-3 px-8 rounded-full transition-colors duration-300 play-audio-btn">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container rounded-xl w-72 h-52 text-center group Sports">
+                <div class="card-inner Sports-card-5">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 5</h2>
+                        <p class="text-2xl mt-2">500</p>
+                    </div>
+                    <div class="card-back flex flex-col items-center justify-center p-4">
+                        <p class="text-2xl text-white font-normal">Guess the song name</p>
+                        <button class="bg-[#ffffff61] text-black font-bold text-lg py-3 px-8 rounded-full transition-colors duration-300 play-audio-btn">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container rounded-xl w-72 h-52 text-center group Sports">
+                <div class="card-inner Sports-card-6">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 6</h2>
+                        <p class="text-2xl mt-2">600</p>
+                    </div>
+                    <div class="card-back flex flex-col items-center justify-center p-4">
+                        <p class="text-2xl text-white font-normal">Guess the song name</p>
+                        <button class="bg-[#ffffff61] text-black font-bold text-lg py-3 px-8 rounded-full transition-colors duration-300 play-audio-btn">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <audio id="sportsaudio1">
+        <source src="../assets/sports_100.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sportsaudio2">
+        <source src="../assets/sports_100.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sportsaudio3">
+        <source src="../assets/sports_300.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sportsaudio4">
+        <source src="../assets/sports_400.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sportsaudio5">
+        <source src="../assets/sports_500.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sportsaudio6">
+        <source src="../assets/sports_500.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="wildcardPopup" class="popup-overlay">
+        <div class="popup-content p-8 rounded-xl text-center">
+            <h3 class="text-3xl font-bold mb-4">BIDDING DONE?</h3>
+            <button id="sportsRevealButton" class="cta-button bg-green-500 hover:bg-green-400 text-[#000d06] font-bold py-2 px-6 rounded-full shadow-md">
+                Reveal Question
+            </button>
+        </div>
+    </div>
+
+    <div id="questionPopup" class="popup-overlay">
+        <div class="popup-content revealed-question-content p-8 rounded-xl text-center flex-col">
+            <h3 class="text-2xl font-bold mb-4">Question</h3>
+            <div id="revealedQuestionText" class="w-full h-auto p-4 flex justify-center items-center"></div>
+            <div id="revealedImageContainer" class="w-full h-auto p-4 flex justify-center items-center"></div>
+            <div id="revealedAudioContainer" class="w-full h-auto p-4 flex justify-center items-center"></div>
+            <button id="closeQuestionButton" class="cta-button bg-green-500 hover:bg-green-400 text-[#000d06] font-bold py-2 px-6 rounded-full shadow-md mt-4">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <div id="timesUpPopup" class="popup-overlay">
+        <div class="popup-content p-8 rounded-xl text-center">
+            <h3 class="text-2xl font-bold mb-4">TIME'S UP!</h3>
+            <p>The clock ran out.</p>
+            <button class="cta-button bg-green-500 hover:bg-green-400 text-[#000d06] font-bold py-2 px-6 rounded-full shadow-md mt-4">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="Cards.js"></script>
+
+</body>
+</html>

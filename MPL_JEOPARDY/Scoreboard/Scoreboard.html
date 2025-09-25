@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Leaderboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Scoreboard.css">
+</head>
+<body>
+  <div class="main-container">
+    <div class="glow-card">
+      <h2 class="card-title">Team Leaderboard</h2>
+      <p class="card-subtitle">Top Performers of the Season</p>
+
+      <div class="card-body">
+        <div class="leaderboard-header">
+          <span class="serial-col">No.</span>
+          <span class="team-col">Team Name</span>
+          <span class="points-col">Points</span>
+        </div>
+
+        <div id="leaderboardRows"></div>
+      </div>
+
+      <button class="sort-btn" onclick="sortTeams()">Sort</button>
+    </div>
+  </div>
+
+  <script src="Scoreboard.js"></script>
+</body>
+</html>

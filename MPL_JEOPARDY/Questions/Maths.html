@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Track</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="QueStyles.css">
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <!-- Navigation Bar -->
+    <nav class="w-full max-w-7xl flex items-center bg-[#1c1639] bg-opacity-70 p-4 rounded-xl shadow-lg border border-[#7e57c2] mb-8">
+        <!-- Game Logo -->
+        <a href="#" class="h-20 w-20 mr-4 flex-shrink-0">
+            <img src="https://github.com/SIAM-VIT/MPL-Jeopardy-Rd3/blob/main/github/Images/Logo.png?raw=true" alt="Logo" class="rounded-full w-full h-full">
+        </a>
+        <!-- Navigation Links and Scoreboard Button -->
+        <div class="flex items-center space-x-12 ml-auto">
+            <a href="./demo.html" class="text-white hover:text-purple-400 transition-colors duration-300 text-lg">Home</a>
+            <a href="#" class="text-white hover:text-purple-400 transition-colors duration-300 text-lg">Powerup</a>
+            <a href="#" class="text-white hover:text-purple-400 transition-colors duration-300 text-lg">Reset</a>
+            <a href="./Scoreboard/Scoreboard.html">
+                <button class="bg-purple-500 hover:bg-purple-400 text-[#0b071e] font-bold py-3 px-8 rounded-full shadow-md transition-colors duration-300 text-lg">Scoreboard</button>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Separate Heading -->
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-8 text-center">
+        MATHS <span class="text-[#b39ddb] border-b-2 border-dashed border-[#7e57c2]">TRACK</span>
+    </h1>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-center w-full max-w-6xl">
+        <!-- Category Cards Grid -->
+        <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 w-full place-items-center">
+            
+            <!-- Card 1: Question 100 -->
+            <div class="card-container rounded-xl w-72 h-52 text-center group Maths">
+                <div class="card-inner Maths-card-1">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 1</h2>
+                        <p class="text-2xl mt-2">100</p>
+                    </div>
+                    <div class="card-back flex items-center justify-center p-4">
+                        <p class="text-xl text-white font-normal">It is a fundamental geometrical point, and when placed between numbers or vectors, it signifies multiplication. </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Question 200 -->
+            <div class="card-container rounded-xl w-72 h-52 text-center group Maths">
+                <div class="card-inner Maths-card-2">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 2</h2>
+                        <p class="text-2xl mt-2">200</p>
+                    </div>
+                    <div class="card-back flex items-center justify-center p-4">
+                        <p class="text-xl text-white font-normal">How many elements does the set of all subsets of a set with 5 elements have?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Question 300 -->
+            <div class="card-container rounded-xl w-72 h-52 text-center group Maths">
+                <div class="card-inner Maths-card-3">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 3</h2>
+                        <p class="text-2xl mt-2">300</p>
+                    </div>
+                    <div class="card-back flex items-center justify-center p-4">
+                        <p class="text-xl text-white font-normal">What quantity is neither a scalar nor a vector quantity? </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Question 400 -->
+            <div class="card-container rounded-xl w-72 h-52 text-center group Maths">
+                <div class="card-inner Maths-card-4">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 4</h2>
+                        <p class="text-2xl mt-2">400</p>
+                    </div>
+                    <div class="card-back flex items-center justify-center p-4">
+                        <p class="text-2xl text-white font-normal">WILD CARD! <br> BETTER GET BIDDING!</p>
+                        <!--<p class="text-xl text-white font-normal">This 2d surface has only one side and one edge.</p>-->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Question 500 -->
+            <div class="card-container rounded-xl w-72 h-52 text-center group Maths">
+                <div class="card-inner Maths-card-5">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 5</h2>
+                        <p class="text-2xl mt-2">500</p>
+                    </div>
+                    <div class="card-back flex items-center justify-center p-4">
+                        <p class="text-xl text-white font-normal">If the ratio of two numbers is the same as the ratio of their sum to the larger of the two quantities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Question 600 -->
+            <div class="card-container rounded-xl w-72 h-52 text-center group Maths">
+                <div class="card-inner Maths-card-6">
+                    <div class="card-front flex flex-col items-center justify-center p-4">
+                        <h2 class="text-3xl font-bold">QUESTION 6</h2>
+                        <p class="text-2xl mt-2">600</p>
+                    </div>
+                    <div class="card-back flex items-center justify-center p-4">
+                        <p class="text-xl text-white font-normal">A donut-shaped surface of revolution generated by revolving a circle around an axis in the same plane?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="wildcardPopup" class="popup-overlay">
+        <div class="popup-content p-8 rounded-xl text-center">
+            <h3 class="text-3xl font-bold mb-4">BIDDING DONE?</h3>
+            <button id="mathsRevealButton" class="cta-button bg-purple-500 hover:bg-purple-400 text-[#0d0a00] font-bold py-2 px-6 rounded-full shadow-md">
+                Reveal Question
+            </button>
+        </div>
+    </div>
+
+    <div id="questionPopup" class="popup-overlay">
+        <div class="popup-content revealed-question-content p-8 rounded-xl text-center">
+            <h3 class="text-2xl font-bold mb-4">Question</h3>
+            <p id="revealedQuestionText" class="text-3xl font-bold"></p>
+            <button id="closeQuestionButton" class="cta-button bg-purple-500 hover:bg-purple-400 text-[#0d0a00] font-bold py-2 px-6 rounded-full shadow-md mt-4">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <div id="timesUpPopup" class="popup-overlay">
+        <div class="popup-content p-8 rounded-xl text-center">
+            <h3 class="text-2xl font-bold mb-4">TIME'S UP!</h3>
+            <p>The clock ran out.</p>
+            <button class="cta-button bg-purple-500 hover:bg-purple-400 text-[#0d0a00] font-bold py-2 px-6 rounded-full shadow-md mt-4">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="Cards.js"></script>
+
+</body>
+</html>
