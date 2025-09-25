@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy Home - Redesigned</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0d1a26;
+            color: #e0fbfc;
+            /* Starry background effect */
+            background-image: radial-gradient(#ffffff22 1px, transparent 1px),
+                                radial-gradient(#ffffff22 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            animation: move-stars 150s linear infinite;
+        }
+
+        @keyframes move-stars {
+            from { background-position: 0 0, 20px 20px; }
+            to { background-position: -400px -400px, -380px -380px; }
+        }
+
+        .card-container {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            /* Royal blue neon effect */
+            box-shadow: 0 0 18px 1px #4169E1; /* RoyalBlue */
+            background: linear-gradient(145deg, rgba(65, 105, 225, 0.1) 0%, rgba(13, 26, 38, 0.8) 100%);
+            cursor: pointer; /* Change cursor on hover */
+        }
+
+        .card-container:hover {
+            transform: translateY(-5px) scale(1.05);
+            /* Royal blue neon effect on hover */
+            box-shadow: 0 0 10px 2px #4169E1, 0 0 15px 6px #6A5ACD; /* RoyalBlue and SlateBlue for more depth */
+        }
+        
+        .card-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            transition: transform 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .card-container:hover::before {
+            transform: scale(1.1);
+        }
+
+        /* Specific background images for each card */
+        .card-sports::before { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6qIivAq9P3NUfmSK7jgnujOpYPFN2fcELqg&s'); }
+        .card-movies::before { background-image: url('https://scariesthings.com/wp-content/uploads/2023/11/Production-Studios-Collage.jpg'); }
+        .card-memes::before { background-image: url('https://static01.nyt.com/images/2020/01/28/multimedia/28xp-memekid3/28cp-memekid3-articleLarge.jpg?quality=75&auto=webp&disable=upscale'); }
+        .card-maths::before { background-image: url('https://cdn.prod.website-files.com/6744bdb342b0a7660e7b7c7d/6834cbb655e09ee0008f6474_67df5face1f96bebc07f8f2b_3b23b533-c408-4380-bce6-0820b89131e9_math-on-board.webp'); }
+        .card-songs::before { background-image: url('https://img.freepik.com/free-photo/people-emotions-lifestyle-leisure-beauty-concept-carefree-happy-asian-woman-listening-music-wireless-headphones-holding-mobile-phone-singing-along-favorite-song-yellow-background_1258-58931.jpg'); }
+        .card-games::before { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Uk_5jeNuZqmqPMnMWLRqq4lKf4oiPS8bmg&s'); }
+        
+        .card-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-button {
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .cta-button:hover {
+            /* Deeper royal blue for hover */
+            background-color: #36454F; /* Charcoal for contrast */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <nav class="w-full max-w-7xl flex items-center bg-[#132a41] bg-opacity-70 p-4 rounded-xl shadow-lg border border-[#4169E1] mb-8">
+        <a href="#" class="h-20 w-20 mr-4 flex-shrink-0">
+            <img src="https://github.com/SIAM-VIT/MPL-Jeopardy-Rd3/blob/main/github/Images/Logo.png?raw=true" alt="Logo" class="rounded-full w-full h-full">
+        </a>
+        <div class="flex items-center space-x-12 ml-auto">
+            <a href="#" class="text-white hover:text-cyan-400 transition-colors duration-300 text-lg">Home</a>
+            <a href="#" class="text-white hover:text-cyan-400 transition-colors duration-300 text-lg">Powerup</a>
+            <a href="#" class="text-white hover:text-cyan-400 transition-colors duration-300 text-lg">Reset</a>
+            <a href="./Scoreboard/Scoreboard.html">
+                <button class="bg-cyan-500 hover:bg-cyan-400 background-[#4169E1] text-[#0d1a26] font-bold py-3 px-8 rounded-full shadow-md transition-colors duration-300 text-lg">
+                    Scoreboard
+                </button>
+            </a>
+        </div>
+    </nav>
+    
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-8 text-center">
+        JEOPARDY <span class="text-[#4d9de0] border-b-2 border-dashed border-[#08a5e8]">TRACKS</span>
+    </h1>
+
+    <main class="flex-1 flex flex-col items-center justify-center w-full max-w-6xl">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 w-full place-items-center">
+            <a href="./Questions/Sports.html" 
+            class="card-container rounded-xl w-72 h-52 flex items-center justify-center text-center group card-sports" 
+            data-track="sports" onclick="handleCardClick(event, this)">
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold">SPORTS</h2>
+                </div>
+            </a>
+
+            <a href="./Questions/Movies.html" class="card-container rounded-xl w-72 h-52 flex items-center justify-center text-center group card-movies" data-track="movies" onclick="handleCardClick(event, this)">
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold mb-4">MOVIES</h2>
+                </div>
+            </a>
+
+            <a href="./Questions/Memes.html" class="card-container rounded-xl w-72 h-52 flex items-center justify-center text-center group card-memes" data-track="memes" onclick="handleCardClick(event, this)">
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold mb-4">MEMES</h2>
+                </div>
+            </a>
+
+            <a href="./Questions/Maths.html" class="card-container rounded-xl w-72 h-52 flex items-center justify-center text-center group card-maths" data-track="maths" onclick="handleCardClick(event, this)">
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold mb-4">MATHS</h2>
+                </div>
+            </a>
+
+            <a href="./Questions/Songs.html" class="card-container rounded-xl w-72 h-52 flex items-center justify-center text-center group card-songs" data-track="songs" onclick="handleCardClick(event, this)">
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold mb-4">SONGS</h2>
+                </div>
+            </a>
+
+            <a href="./Questions/Games.html" class="card-container rounded-xl w-72 h-52 flex items-center justify-center text-center group card-games" data-track="games" onclick="handleCardClick(event, this)">
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold mb-4">GAMES</h2>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const emojiShapes = {};
+        
+        function getEmojiShapes(emojis) {
+          return emojis.map(emoji => {
+            if (!emojiShapes[emoji]) {
+              // Increased scalar value for larger, more identifiable emojis
+              emojiShapes[emoji] = confetti.shapeFromText({ text: emoji, scalar: 6 });
+            }
+            return emojiShapes[emoji];
+          });
+        }
+        
+        function handleCardClick(event, card) {
+            event.preventDefault(); // Stop the default link navigation
+            const url = card.getAttribute('href');
+            const track = card.getAttribute('data-track');
+            const rect = card.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            const emojiSet = {
+                sports: ['⚾️', '🏈', '🏀', '⚽️', '🎾', '🥍'],
+                movies: ['🍿', '🎬', '🎟️', '🎥', '⭐'],
+                memes: ['😂', '🤣', '💀', '🤡', '🤪', '🚀'],
+                maths: ['➕', '➖', '✖️', '➗', '📈', '🧮'],
+                songs: ['🎵', '🎶', '🎤', '🎧', '🎸'],
+                games: ['🎮', '🕹️', '🎲', '👾', '🎯'],
+            };
+            
+            const colorsSet = {
+                sports: ['#f0f8ff', '#90ee90', '#add8e6', '#f08080'],
+                movies: ['#f8f8f8', '#cccccc', '#ffeb3b', '#e0f7fa'],
+                memes: ['#ffcc00', '#ff8800', '#ff0000', '#ffee00'],
+                maths: ['#c0d9d9', '#a0c0c0', '#b5c6c6', '#d0e0e0'],
+                songs: ['#ffc0cb', '#f55d9d', '#ff69b4', '#d8bfd8'],
+                games: ['#90ee90', '#afeeee', '#f0e68c', '#add8e6'],
+            };
+
+            const shapes = getEmojiShapes(emojiSet[track] || []);
+
+            confetti({
+                particleCount: 150,
+                spread: 90,
+                origin: { x: x / window.innerWidth, y: y / window.innerHeight },
+                shapes: shapes,
+                // Changed confetti colors to a royal blue palette
+                colors: colorsSet[track] || ['#e0fbfc', '#6A5ACD', '#4169E1'],
+                disableForCanvas: true
+            });
+
+            setTimeout(() => {
+                window.location.href = url;
+            }, 600); // Navigate after the animation finishes
+        }
+    </script>
+</body>
+</html>
